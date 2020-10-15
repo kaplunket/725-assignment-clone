@@ -35,7 +35,21 @@ central server, ring token, multicast, mutual exclusion, distributed systems
 
 \section{Mutual Exclusion Algorithms}
 \subsection{Overview}
-Some algorithms do some things other algorithms do other things.
+Mutual exclusion is generally concerned with preventing interference and
+ensuring consistency with resource access. For operating systems, this can be
+managed with relative ease. However, distributed systems do not have the
+shared variables or facilities that would be supplied by a single local kernel,
+so a different approach is required. This is where distributed mutual exclusion
+algorithms come into play, and a few of these are discussed in the following
+subsections. \\
+There are a few key assumptions made in this report that should be
+acknowledged. The system being considered is comprised of \textit{N} processes
+\textit{p\textsubscript{i}} with $i=1,2,3... N$. These process do not share
+variables, but access common resources. These resources are contained within
+a single critical section, and the system as a whole is asynchronous. The
+failure of processes is not considered, with message delivery being reliable so
+that any message sent is guaranteed to be delivered eventually and delivered
+exactly once. No message loss or duplication occurs.
 \subsection{Central Server}
 \subsection{Ring Token}
 \subsection{Multicast}
@@ -46,6 +60,21 @@ bibliography you must send the .bib files.
 
 
 \section{Comparison of Algorithms}
+There are a few requirements for mutual exclusion, such as:
+\begin{itemize}
+  \item Safety
+  \item Liveness
+  \item Fairness
+\end{itemize}
+Of these, \textit{Safety} and \textit{Liveness} are considered essential
+requirements.
+Performance of any one algorithm is evaluated against a set of fixed criteria,
+defined as follows.
+\begin{itemize}
+  \item Consumed Bandwidth
+  \item Client Delay
+  \item Effect on Throughput
+\end{itemize}
 
 \begin{table}[htbp]
 \caption{Table Type Styles}
@@ -54,9 +83,12 @@ bibliography you must send the .bib files.
 \hline
 \textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
 \cline{2-4} 
-\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
+\textbf{Algorithm} & \textbf{\textit{Bandiwidth}}& \textbf{\textit{Client
+  Delay}}& \textbf{\textit{Throughput}} \\
 \hline
-copy& More table copy$^{\mathrm{a}}$& &  \\
+Central Server & More table copy & &  \\
+Ring Token & More table copy & &  \\
+Multicast & More table copy & &  \\
 \hline
 \multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
 \end{tabular}
@@ -75,7 +107,6 @@ This report acknowledges the teachings of Dr. Avinash Malik and Ms. Jesin James
 in the course COMPSYS 725: Distributed Cyber-Physical Systems taught at the
 University of Auckland in Semester Two of the year 2020.
 
-\section*{References}
 \begin{thebibliography}{00}
 \bibitem{b1} George F. Coulouris, Jean Dollimore, Tim Kindberg and Gordon
   Blair, ``Distributed Systems: Concepts and Designs'', 5th ed, Boston,
