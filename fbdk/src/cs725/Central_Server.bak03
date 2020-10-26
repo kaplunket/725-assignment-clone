@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="Central_Server" Comment="Basic Function Block Type" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-04" Remarks="Renamed for better indexing." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-11-05" Remarks="Corrected missing ST element in Algorithm REQ." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-30" />
+  <CompilerInfo header="package fb.rt.cs725;" >
+  </CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="Con1" />
+        <With Var="Con2" />
+        <With Var="PE" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="Enable2" />
+        <With Var="Enable1" />
+        <With Var="Block" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Con1" Type="BOOL" />
+      <VarDeclaration Name="Con2" Type="BOOL" />
+      <VarDeclaration Name="PE" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="Enable1" Type="BOOL" />
+      <VarDeclaration Name="Enable2" Type="BOOL" />
+      <VarDeclaration Name="Block" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <BasicFB>
+    <InternalVars>
+      <VarDeclaration Name="queue" Type="ARRAY" ArraySize="3" />
+    </InternalVars>
+    <ECC >
+      <ECState Name="START" Comment="Initial State" x="552.94116" y="429.41174" >
+      </ECState>
+      <ECState Name="INIT" Comment="Initialization" x="923.5294" y="141.17647" >
+        <ECAction Algorithm="INIT" Output="INITO" />
+      </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="217.64705" y="752.94116" >
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
+      <ECState Name="Release" x="1617.647" y="664.7059" >
+      </ECState>
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="923.5294" y="429.41174" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="552.94116" y="141.17647" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ" x="552.94116" y="600.0" />
+      <ECTransition Source="REQ" Destination="START" Condition="1" x="217.64705" y="429.41174" />
+      <ECTransition Source="START" Destination="Release" Condition="PE" x="805.8823" y="664.7059" />
+    </ECC>
+  <Algorithm Name="INIT" Comment="Initialization algorithm" >
+    <Other Language="Java" Text="Enable1.value=false;&#10;Enable2.value=false;&#10;" />
+  </Algorithm>
+  <Algorithm Name="REQ" Comment="Normally executed algorithm" >
+    <Other Language="Java" Text="if (Con1.value){&#10;&#10;}&#10;" />
+  </Algorithm>
+  <Algorithm Name="Release" >
+    <Other Language="Java" Text="" />
+  </Algorithm>
+  </BasicFB>
+</FBType>
