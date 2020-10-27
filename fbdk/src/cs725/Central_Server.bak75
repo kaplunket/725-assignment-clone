@@ -80,12 +80,12 @@
       <ECTransition Source="Release" Destination="START" Condition="1" x="4035.294" y="547.05884" />
       <ECTransition Source="START" Destination="Check_Release" Condition="Release" x="2052.9412" y="758.8235" />
       <ECTransition Source="Check_Release" Destination="Release" Condition="token" x="2476.4705" y="952.94116" />
-      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;(!Con1 = Con1_prev)" x="1323.5294" y="994.1176" />
+      <ECTransition Source="START" Destination="REQ" Condition="REQ&#38;(Con1 == Con1_prev)" x="1323.5294" y="994.1176" />
       <ECTransition Source="Check_Release" Destination="START" Condition="!token" x="2182.3528" y="547.05884" />
       <ECTransition Source="REQ" Destination="Update_Con" Condition="1" x="1447.0588" y="1552.9412" />
       <ECTransition Source="Update_Con" Destination="Release" Condition="Con2 | Con1" x="4035.294" y="1452.9412" />
       <ECTransition Source="Update_Con" Destination="START" Condition="!Con2 &#38; !Con1" x="382.35294" y="982.3529" />
-      <ECTransition Source="START" Destination="REQ2" Condition="REQ&#38;(!Con2 = Con2_prev)" x="2082.3528" y="1117.6471" />
+      <ECTransition Source="START" Destination="REQ2" Condition="REQ&#38;(Con2 == Con2_prev)" x="2082.3528" y="1117.6471" />
       <ECTransition Source="REQ2" Destination="Update_Con" Condition="1" x="2082.3528" y="1582.3529" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
