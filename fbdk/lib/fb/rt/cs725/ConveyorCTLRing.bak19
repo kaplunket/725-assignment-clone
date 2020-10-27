@@ -19,8 +19,6 @@ public class ConveyorCTLRing extends FBInstance
   public BOOL TokenIn = new BOOL();
 /** VAR PE13CS */
   public BOOL PE13CS = new BOOL();
-/** VAR InitToken */
-  public BOOL InitToken = new BOOL();
 /** Output event qualifier */
   public BOOL MotoRotate = new BOOL();
 /** VAR BlockCon */
@@ -84,7 +82,6 @@ public class ConveyorCTLRing extends FBInstance
     if("Candidate".equals(s)) return Candidate;
     if("TokenIn".equals(s)) return TokenIn;
     if("PE13CS".equals(s)) return PE13CS;
-    if("InitToken".equals(s)) return InitToken;
     return super.ivNamed(s);}
 /** {@inheritDoc}
 * @param s {@inheritDoc}
@@ -107,7 +104,6 @@ public class ConveyorCTLRing extends FBInstance
     else if("Candidate".equals(ivName)) connect_Candidate((BOOL)newIV);
     else if("TokenIn".equals(ivName)) connect_TokenIn((BOOL)newIV);
     else if("PE13CS".equals(ivName)) connect_PE13CS((BOOL)newIV);
-    else if("InitToken".equals(ivName)) connect_InitToken((BOOL)newIV);
     else super.connectIV(ivName, newIV);
     }
 /** Connect the given variable to the input variable PE
@@ -140,12 +136,6 @@ public class ConveyorCTLRing extends FBInstance
   public void connect_PE13CS(BOOL newIV){
     PE13CS = newIV;
     }
-/** Connect the given variable to the input variable InitToken
-  * @param newIV The variable to connect
- */
-  public void connect_InitToken(BOOL newIV){
-    InitToken = newIV;
-    }
 private static final int index_START = 0;
 private void state_START(){
   eccState = index_START;
@@ -177,29 +167,13 @@ private void state_PassToken(){
   eccState = index_PassToken;
   alg_START();
   CNF.serviceEvent(this);
-  alg_TokenFree();
-  TokenEventOut.serviceEvent(this);
+  alg_TokenInUse();
+  CNF.serviceEvent(this);
 state_START();
 }
 private static final int index_AwaitToken = 5;
 private void state_AwaitToken(){
   eccState = index_AwaitToken;
-  alg_STOP();
-  CNF.serviceEvent(this);
-}
-private static final int index_Bag2Access = 6;
-private void state_Bag2Access(){
-  eccState = index_Bag2Access;
-  alg_STOP();
-  CNF.serviceEvent(this);
-}
-private static final int index_ReleaseToken = 7;
-private void state_ReleaseToken(){
-  eccState = index_ReleaseToken;
-  alg_TokenFree();
-  TokenEventOut.serviceEvent(this);
-  alg_STOP();
-  CNF.serviceEvent(this);
 }
 /** The default constructor. */
 public ConveyorCTLRing(){
@@ -222,12 +196,8 @@ public ConveyorCTLRing(){
   }
 /** Services the REQ event. */
   public void service_REQ(){
-    if ((eccState == index_AccessCritical) && (!PE13CS.value)) state_PassToken();
-    else if ((eccState == index_START) && (!PE.value&!TokenIn.value)) state_AwaitToken();
-    else if ((eccState == index_START) && (PE.value&TokenIn.value)) state_PassToken();
-    else if ((eccState == index_AwaitToken) && (TokenIn.value)) state_AccessCritical();
-    else if ((eccState == index_Bag2Access) && (PE13CS.value)) state_ReleaseToken();
-    else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_AccessCritical();
+    if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_AccessCritical();
+    else if ((eccState == index_AccessCritical) && (!PE13CS.value)) state_PassToken();
   }
 /** Services the CAS_STOP event. */
   public void service_CAS_STOP(){
@@ -238,14 +208,13 @@ public ConveyorCTLRing(){
 /** Services the TokenEvent event. */
   public void service_TokenEvent(){
   }
-  /** ALGORITHM INIT IN Java*/
+  /** ALGORITHM INIT IN ST*/
 public void alg_INIT(){
 MotoRotate.value=true;
 Block.value=false;
-TokenOut.value = InitToken.value;
+
 System.out.println(this+" "+MotoRotate.value);
 System.out.println(MotoRotate.value);
-
 }
   /** ALGORITHM REQ IN Java*/
 public void alg_REQ(){

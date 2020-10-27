@@ -14,13 +14,11 @@
         <With Var="Block" />
         <With Var="PE" />
         <With Var="PE13CS" />
-        <With Var="InitToken" />
       </Event>
       <Event Name="REQ" Comment="Normal Execution Request" >
         <With Var="Candidate" />
         <With Var="PE" />
         <With Var="PE13CS" />
-        <With Var="InitToken" />
       </Event>
       <Event Name="START" >
         <With Var="Block" />
@@ -29,7 +27,6 @@
         <With Var="Block" />
       </Event>
       <Event Name="TokenEvent" >
-        <With Var="TokenIn" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -52,7 +49,6 @@
       <VarDeclaration Name="PE" Type="BOOL" />
       <VarDeclaration Name="PE13CS" Type="BOOL" />
       <VarDeclaration Name="TokenIn" Type="BOOL" />
-      <VarDeclaration Name="InitToken" Type="BOOL" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="MotoRotate1" Type="BOOL" />
@@ -92,7 +88,6 @@
       <Connection Source="FC12Ring.BlockCon" Destination="BlockCon" dx1="3758.8235" />
       <Connection Source="FC12Ring.TokenOut" Destination="TokenOut" dx1="3764.7058" />
       <Connection Source="PE13CS" Destination="FC12Ring.PE13CS" dx1="2588.2354" />
-      <Connection Source="InitToken" Destination="FC12Ring.InitToken" dx1="2582.3528" />
     </DataConnections>
   </FBNetwork>
 </FBType>

@@ -223,11 +223,8 @@ public ConveyorCTLRing(){
 /** Services the REQ event. */
   public void service_REQ(){
     if ((eccState == index_AccessCritical) && (!PE13CS.value)) state_PassToken();
-    else if ((eccState == index_START) && (!PE.value&!TokenIn.value)) state_AwaitToken();
-    else if ((eccState == index_START) && (PE.value&TokenIn.value)) state_PassToken();
     else if ((eccState == index_AwaitToken) && (TokenIn.value)) state_AccessCritical();
     else if ((eccState == index_Bag2Access) && (PE13CS.value)) state_ReleaseToken();
-    else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_AccessCritical();
   }
 /** Services the CAS_STOP event. */
   public void service_CAS_STOP(){
@@ -237,6 +234,9 @@ public ConveyorCTLRing(){
   }
 /** Services the TokenEvent event. */
   public void service_TokenEvent(){
+    if ((eccState == index_START) && (!PE.value&!TokenIn.value)) state_AwaitToken();
+    else if ((eccState == index_START) && (PE.value)) state_PassToken();
+    else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_AccessCritical();
   }
   /** ALGORITHM INIT IN Java*/
 public void alg_INIT(){

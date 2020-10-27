@@ -22,7 +22,6 @@
         <With Var="PE" />
         <With Var="PE13CS" />
         <With Var="InitToken" />
-        <With Var="TokenIn" />
       </Event>
       <Event Name="TokenEvent" >
       </Event>

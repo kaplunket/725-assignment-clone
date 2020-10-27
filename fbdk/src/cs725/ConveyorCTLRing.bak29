@@ -28,7 +28,6 @@
       <Event Name="CAS_START" >
       </Event>
       <Event Name="TokenEvent" >
-        <With Var="TokenIn" />
       </Event>
     </EventInputs>
     <EventOutputs>
@@ -70,42 +69,32 @@
       <VarDeclaration Name="lastBlock" Type="BOOL" InitialValue="0" />
     </InternalVars>
     <ECC >
-      <ECState Name="START" Comment="Initial State" x="1752.9412" y="576.4706" >
+      <ECState Name="START" Comment="Initial State" x="664.7059" y="470.58823" >
       </ECState>
-      <ECState Name="INIT" Comment="Initialization" x="2711.7646" y="152.94118" >
+      <ECState Name="INIT" Comment="Initialization" x="923.5294" y="141.17647" >
         <ECAction Algorithm="INIT" Output="INITO" />
         <ECAction Output="CNF" />
       </ECState>
       <ECState Name="REQ" Comment="Normal execution" x="511.7647" y="3488.235" >
         <ECAction Algorithm="REQ" Output="CNF" />
       </ECState>
-      <ECState Name="AccessCritical" x="6047.0586" y="1447.0588" >
+      <ECState Name="AccessCritical" x="2523.5293" y="1200.0" >
         <ECAction Algorithm="START" Output="CNF" />
         <ECAction Algorithm="TokenInUse" Output="TokenEventOut" />
       </ECState>
-      <ECState Name="PassToken" x="6047.0586" y="2758.8235" >
+      <ECState Name="PassToken" x="3776.4705" y="2223.5293" >
         <ECAction Algorithm="START" Output="CNF" />
-        <ECAction Algorithm="TokenFree" Output="TokenEventOut" />
+        <ECAction Algorithm="TokenInUse" Output="CNF" />
       </ECState>
-      <ECState Name="AwaitToken" x="5329.4116" y="558.82355" >
+      <ECState Name="AwaitToken" x="405.88235" y="2747.0588" >
         <ECAction Algorithm="STOP" Output="CNF" />
       </ECState>
-      <ECState Name="Bag2Access" x="9000.0" y="1194.1177" >
-        <ECAction Algorithm="STOP" Output="CNF" />
-      </ECState>
-      <ECState Name="ReleaseToken" x="6929.4116" y="141.17647" >
-        <ECAction Algorithm="TokenFree" Output="TokenEventOut" />
-        <ECAction Algorithm="STOP" Output="CNF" />
-      </ECState>
-      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2511.7646" y="370.58823" />
-      <ECTransition Source="INIT" Destination="START" Condition="1" x="2317.647" y="152.94118" />
-      <ECTransition Source="AccessCritical" Destination="PassToken" Condition="REQ&#38;!PE13CS" x="6305.8823" y="2129.4116" />
-      <ECTransition Source="PassToken" Destination="START" Condition="1" x="4594.1177" y="2805.8823" />
-      <ECTransition Source="START" Destination="AwaitToken" Condition="REQ&#38;!PE&#38;!TokenIn" x="4217.647" y="423.52942" />
-      <ECTransition Source="START" Destination="PassToken" Condition="REQ&#38;PE&#38;TokenIn" x="5458.823" y="2076.4705" />
-      <ECTransition Source="AwaitToken" Destination="AccessCritical" Condition="REQ&#38;TokenIn" x="5935.294" y="1047.0588" />
-      <ECTransition Source="Bag2Access" Destination="ReleaseToken" Condition="REQ&#38;PE13CS" x="7929.4116" y="452.94116" />
-      <ECTransition Source="START" Destination="AccessCritical" Condition="REQ&#38;!PE&#38;TokenIn" x="4582.353" y="1147.0588" />
+      <ECTransition Source="START" Destination="INIT" Condition="INIT" x="1035.2941" y="470.58823" />
+      <ECTransition Source="INIT" Destination="START" Condition="1" x="664.7059" y="182.35294" />
+      <ECTransition Source="START" Destination="AccessCritical" Condition="REQ&#38;!PE &#38; TokenIn" x="1776.4706" y="1035.2941" />
+      <ECTransition Source="AccessCritical" Destination="PassToken" Condition="REQ&#38;!PE13CS" x="3347.0588" y="1847.0588" />
+      <ECTransition Source="PassToken" Destination="START" Condition="1" x="1235.2941" y="2164.7058" />
+      <ECTransition Source="START" Destination="AwaitToken" Condition="REQ&#38;Pe &#38; !TokenIn" x="564.7059" y="2552.9412" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <Other Language="Java" Text="MotoRotate.value=true;&#10;Block.value=false;&#10;TokenOut.value = InitToken.value;&#10;System.out.println(this+&#34; &#34;+MotoRotate.value);&#10;System.out.println(MotoRotate.value);&#10;" />

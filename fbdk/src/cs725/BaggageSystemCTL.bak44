@@ -210,7 +210,7 @@
           <Parameter Name="PE" Value="0" />
         </FB>
         <FB Name="Central_Server" Type="Central_Server" x="2005.8823" y="588.2353" />
-        <FB Name="FCTwoRing" Type="TwoConCtlRing" x="2717.647" y="4329.4116" >
+        <FB Name="FCTwoRing" Type="TwoConCtlRing" x="2505.8823" y="4611.7646" >
           <Parameter Name="Candidate" Value="1" />
           <Parameter Name="InitToken" Value="1" />
         </FB>

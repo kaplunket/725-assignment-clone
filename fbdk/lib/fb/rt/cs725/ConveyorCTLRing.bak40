@@ -186,14 +186,22 @@ private void state_AwaitToken(){
   eccState = index_AwaitToken;
   alg_STOP();
   CNF.serviceEvent(this);
+state_ReleaseToken();
 }
-private static final int index_Bag2Access = 6;
+private static final int index_AccessBagClear = 6;
+private void state_AccessBagClear(){
+  eccState = index_AccessBagClear;
+  alg_TokenInUse();
+  TokenEventOut.serviceEvent(this);
+  CNF.serviceEvent(this);
+}
+private static final int index_Bag2Access = 7;
 private void state_Bag2Access(){
   eccState = index_Bag2Access;
   alg_STOP();
   CNF.serviceEvent(this);
 }
-private static final int index_ReleaseToken = 7;
+private static final int index_ReleaseToken = 8;
 private void state_ReleaseToken(){
   eccState = index_ReleaseToken;
   alg_TokenFree();
@@ -224,10 +232,12 @@ public ConveyorCTLRing(){
   public void service_REQ(){
     if ((eccState == index_AccessCritical) && (!PE13CS.value)) state_PassToken();
     else if ((eccState == index_START) && (!PE.value&!TokenIn.value)) state_AwaitToken();
-    else if ((eccState == index_START) && (PE.value&TokenIn.value)) state_PassToken();
+    else if ((eccState == index_START) && (TokenIn.value&PE.value)) state_PassToken();
     else if ((eccState == index_AwaitToken) && (TokenIn.value)) state_AccessCritical();
+    else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_AccessBagClear();
+    else if ((eccState == index_AccessBagClear) && (PE.value)) state_AccessCritical();
+    else if ((eccState == index_AccessCritical) && (!PE.value)) state_Bag2Access();
     else if ((eccState == index_Bag2Access) && (PE13CS.value)) state_ReleaseToken();
-    else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_AccessCritical();
   }
 /** Services the CAS_STOP event. */
   public void service_CAS_STOP(){
