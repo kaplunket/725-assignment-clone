@@ -31,8 +31,6 @@ public class ConveyorCTLRing extends FBInstance
   public BOOL lastPE = new BOOL();
 /** VAR lastBlock */
   public BOOL lastBlock = new BOOL();
-/** VAR Token */
-  public BOOL Token = new BOOL();
 /** Initialization Request */
  public EventServer INIT = new EventInput(this);
 /** Normal Execution Request */
@@ -171,13 +169,16 @@ private void state_AccessCritical(){
   eccState = index_AccessCritical;
   alg_START();
   CNF.serviceEvent(this);
+  alg_TokenInUse();
+  TokenEventOut.serviceEvent(this);
 }
 private static final int index_PassToken = 4;
 private void state_PassToken(){
   eccState = index_PassToken;
   alg_START();
+  CNF.serviceEvent(this);
+  alg_TokenFree();
   TokenEventOut.serviceEvent(this);
-  alg_SetTokenFalse();
 state_START();
 }
 private static final int index_AwaitToken = 5;
@@ -195,21 +196,18 @@ private void state_Bag2Access(){
 private static final int index_ReleaseToken = 7;
 private void state_ReleaseToken(){
   eccState = index_ReleaseToken;
-  alg_STOP();
+  alg_TokenFree();
   TokenEventOut.serviceEvent(this);
+  alg_STOP();
+  CNF.serviceEvent(this);
 state_AwaitToken();
 }
 private static final int index_ACcessCriticalWaitBagClear = 8;
 private void state_ACcessCriticalWaitBagClear(){
   eccState = index_ACcessCriticalWaitBagClear;
   CNF.serviceEvent(this);
-}
-private static final int index_SetToken = 9;
-private void state_SetToken(){
-  eccState = index_SetToken;
-  alg_SetToken();
+  alg_TokenInUse();
   TokenEventOut.serviceEvent(this);
-state_START();
 }
 /** The default constructor. */
 public ConveyorCTLRing(){
@@ -233,11 +231,12 @@ public ConveyorCTLRing(){
 /** Services the REQ event. */
   public void service_REQ(){
     if ((eccState == index_AccessCritical) && (!PE13CS.value)) state_PassToken();
-    else if ((eccState == index_START) && (!PE.value&!Token.value)) state_AwaitToken();
-    else if ((eccState == index_START) && (PE.value&Token.value)) state_PassToken();
+    else if ((eccState == index_START) && (!PE.value&!TokenIn.value)) state_AwaitToken();
+    else if ((eccState == index_START) && (PE.value&TokenIn.value)) state_PassToken();
+    else if ((eccState == index_AwaitToken) && (TokenIn.value)) state_AccessCritical();
     else if ((eccState == index_Bag2Access) && (!PE13CS.value)) state_ReleaseToken();
     else if ((eccState == index_AccessCritical) && (!PE.value)) state_Bag2Access();
-    else if ((eccState == index_START) && (!PE.value&Token.value)) state_ACcessCriticalWaitBagClear();
+    else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_ACcessCriticalWaitBagClear();
     else if ((eccState == index_ACcessCriticalWaitBagClear) && (PE.value)) state_AccessCritical();
   }
 /** Services the CAS_STOP event. */
@@ -248,14 +247,12 @@ public ConveyorCTLRing(){
   }
 /** Services the TokenEvent event. */
   public void service_TokenEvent(){
-    if ((eccState == index_AwaitToken)) state_AccessCritical();
-    else if ((eccState == index_START)) state_SetToken();
   }
   /** ALGORITHM INIT IN Java*/
 public void alg_INIT(){
 MotoRotate.value=true;
 Block.value=false;
-Token.value=InitToken.value;
+TokenOut.value = InitToken.value;
 System.out.println(this+" "+MotoRotate.value);
 System.out.println(MotoRotate.value);
 
@@ -302,29 +299,19 @@ System.out.println("Start "+MotoRotate.value);
   /** ALGORITHM STOP IN Java*/
 public void alg_STOP(){
 MotoRotate.value=false;
-System.out.println("hello  " + this+" Stop "+MotoRotate.value);
+System.out.println(this+" Stop "+MotoRotate.value);
 
 System.out.println("Stop "+MotoRotate.value);
 
 }
   /** ALGORITHM TokenInUse IN Java*/
 public void alg_TokenInUse(){
+TokenOut.value = false;
 
 }
   /** ALGORITHM TokenFree IN Java*/
 public void alg_TokenFree(){
 TokenOut.value = true;
-
-}
-  /** ALGORITHM SetToken IN Java*/
-public void alg_SetToken(){
-Token.value = true;
-MotoRotate.value=true;
-
-}
-  /** ALGORITHM SetTokenFalse IN Java*/
-public void alg_SetTokenFalse(){
-Token.value=false;
 
 }
 }

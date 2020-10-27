@@ -177,7 +177,6 @@ private void state_PassToken(){
   eccState = index_PassToken;
   alg_START();
   TokenEventOut.serviceEvent(this);
-  alg_SetTokenFalse();
 state_START();
 }
 private static final int index_AwaitToken = 5;
@@ -320,11 +319,6 @@ TokenOut.value = true;
 public void alg_SetToken(){
 Token.value = true;
 MotoRotate.value=true;
-
-}
-  /** ALGORITHM SetTokenFalse IN Java*/
-public void alg_SetTokenFalse(){
-Token.value=false;
 
 }
 }

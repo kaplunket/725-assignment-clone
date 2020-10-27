@@ -176,8 +176,7 @@ private static final int index_PassToken = 4;
 private void state_PassToken(){
   eccState = index_PassToken;
   alg_START();
-  TokenEventOut.serviceEvent(this);
-  alg_SetTokenFalse();
+  CNF.serviceEvent(this);
 state_START();
 }
 private static final int index_AwaitToken = 5;
@@ -196,20 +195,13 @@ private static final int index_ReleaseToken = 7;
 private void state_ReleaseToken(){
   eccState = index_ReleaseToken;
   alg_STOP();
-  TokenEventOut.serviceEvent(this);
+  CNF.serviceEvent(this);
 state_AwaitToken();
 }
 private static final int index_ACcessCriticalWaitBagClear = 8;
 private void state_ACcessCriticalWaitBagClear(){
   eccState = index_ACcessCriticalWaitBagClear;
   CNF.serviceEvent(this);
-}
-private static final int index_SetToken = 9;
-private void state_SetToken(){
-  eccState = index_SetToken;
-  alg_SetToken();
-  TokenEventOut.serviceEvent(this);
-state_START();
 }
 /** The default constructor. */
 public ConveyorCTLRing(){
@@ -233,11 +225,8 @@ public ConveyorCTLRing(){
 /** Services the REQ event. */
   public void service_REQ(){
     if ((eccState == index_AccessCritical) && (!PE13CS.value)) state_PassToken();
-    else if ((eccState == index_START) && (!PE.value&!Token.value)) state_AwaitToken();
-    else if ((eccState == index_START) && (PE.value&Token.value)) state_PassToken();
     else if ((eccState == index_Bag2Access) && (!PE13CS.value)) state_ReleaseToken();
     else if ((eccState == index_AccessCritical) && (!PE.value)) state_Bag2Access();
-    else if ((eccState == index_START) && (!PE.value&Token.value)) state_ACcessCriticalWaitBagClear();
     else if ((eccState == index_ACcessCriticalWaitBagClear) && (PE.value)) state_AccessCritical();
   }
 /** Services the CAS_STOP event. */
@@ -248,14 +237,15 @@ public ConveyorCTLRing(){
   }
 /** Services the TokenEvent event. */
   public void service_TokenEvent(){
-    if ((eccState == index_AwaitToken)) state_AccessCritical();
-    else if ((eccState == index_START)) state_SetToken();
+    if ((eccState == index_START) && (!PE.value)) state_AwaitToken();
+    else if ((eccState == index_START) && (PE.value)) state_PassToken();
+    else if ((eccState == index_AwaitToken)) state_AccessCritical();
+    else if ((eccState == index_START) && (!PE.value)) state_ACcessCriticalWaitBagClear();
   }
   /** ALGORITHM INIT IN Java*/
 public void alg_INIT(){
 MotoRotate.value=true;
 Block.value=false;
-Token.value=InitToken.value;
 System.out.println(this+" "+MotoRotate.value);
 System.out.println(MotoRotate.value);
 
@@ -302,7 +292,7 @@ System.out.println("Start "+MotoRotate.value);
   /** ALGORITHM STOP IN Java*/
 public void alg_STOP(){
 MotoRotate.value=false;
-System.out.println("hello  " + this+" Stop "+MotoRotate.value);
+System.out.println(this+" Stop "+MotoRotate.value);
 
 System.out.println("Stop "+MotoRotate.value);
 
@@ -318,13 +308,7 @@ TokenOut.value = true;
 }
   /** ALGORITHM SetToken IN Java*/
 public void alg_SetToken(){
-Token.value = true;
-MotoRotate.value=true;
-
-}
-  /** ALGORITHM SetTokenFalse IN Java*/
-public void alg_SetTokenFalse(){
-Token.value=false;
+Token.value = InitToken.value;
 
 }
 }

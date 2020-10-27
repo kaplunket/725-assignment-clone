@@ -85,7 +85,6 @@
       </ECState>
       <ECState Name="PassToken" x="6047.0586" y="2758.8235" >
         <ECAction Algorithm="START" Output="TokenEventOut" />
-        <ECAction Algorithm="SetTokenFalse" />
       </ECState>
       <ECState Name="AwaitToken" x="5329.4116" y="558.82355" >
         <ECAction Algorithm="STOP" Output="CNF" />
@@ -106,19 +105,19 @@
       <ECTransition Source="INIT" Destination="START" Condition="1" x="2317.647" y="152.94118" />
       <ECTransition Source="AccessCritical" Destination="PassToken" Condition="REQ&#38;!PE13CS" x="6305.8823" y="2129.4116" />
       <ECTransition Source="PassToken" Destination="START" Condition="1" x="4594.1177" y="2805.8823" />
-      <ECTransition Source="START" Destination="AwaitToken" Condition="REQ&#38;!PE &#38; !Token" x="4217.647" y="423.52942" />
+      <ECTransition Source="START" Destination="AwaitToken" Condition="!PE &#38; !Token" x="4217.647" y="423.52942" />
       <ECTransition Source="START" Destination="PassToken" Condition="REQ&#38;PE &#38; Token" x="5458.823" y="2076.4705" />
       <ECTransition Source="AwaitToken" Destination="AccessCritical" Condition="TokenEvent" x="5935.294" y="1047.0588" />
       <ECTransition Source="Bag2Access" Destination="ReleaseToken" Condition="REQ&#38;!PE13CS" x="7176.47" y="423.52942" />
       <ECTransition Source="AccessCritical" Destination="Bag2Access" Condition="REQ&#38;!PE" x="7429.4116" y="888.2353" />
       <ECTransition Source="ReleaseToken" Destination="AwaitToken" Condition="1" x="5694.1177" y="423.52942" />
-      <ECTransition Source="START" Destination="ACcessCriticalWaitBagClear" Condition="REQ&#38;!PE &#38; Token" x="3405.8823" y="811.7647" />
+      <ECTransition Source="START" Destination="ACcessCriticalWaitBagClear" Condition="!PE &#38; Token" x="3405.8823" y="811.7647" />
       <ECTransition Source="ACcessCriticalWaitBagClear" Destination="AccessCritical" Condition="REQ&#38;PE" x="4664.7056" y="1347.0588" />
       <ECTransition Source="START" Destination="SetToken" Condition="TokenEvent" x="1611.7646" y="1464.7058" />
       <ECTransition Source="SetToken" Destination="START" Condition="1" x="923.5294" y="1129.4117" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
-    <Other Language="Java" Text="MotoRotate.value=true;&#10;Block.value=false;&#10;Token.value=InitToken.value;&#10;System.out.println(this+&#34; &#34;+MotoRotate.value);&#10;System.out.println(MotoRotate.value);&#10;" />
+    <Other Language="Java" Text="MotoRotate.value=true;&#10;Block.value=false;&#10;System.out.println(this+&#34; &#34;+MotoRotate.value);&#10;System.out.println(MotoRotate.value);&#10;" />
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
     <Other Language="Java" Text="System.out.println(this+&#34; -> Candidate&#34;+Candidate.value);&#10;if(Candidate.value){&#10;if(lastPE.value!=PE.value){&#10;if(!PE.value){&#10;BlockCon.value=true;&#10;System.out.println(&#34;BlockCon = true&#34;);&#10;}&#10;else{&#10;BlockCon.value=false;&#10;System.out.println(&#34;BlockCon = false&#34;);&#10;}&#10;lastPE.value=PE.value;&#10;}&#10;if(lastBlock.value!=Block.value){&#10;if(Block.value){&#10;STOP.serviceEvent(this);&#10;MotoRotate.value=false;&#10;System.out.println(&#34;Cas Stop&#34;);&#10;}&#10;else{&#10;START.serviceEvent(this);&#10;MotoRotate.value=true;&#10;System.out.println(&#34;Cas Start&#34;);&#10;}&#10;lastBlock.value=Block.value;&#10;}&#10;}&#10;" />
@@ -137,9 +136,6 @@
   </Algorithm>
   <Algorithm Name="SetToken" >
     <Other Language="Java" Text="Token.value = true;&#10;MotoRotate.value=true;&#10;" />
-  </Algorithm>
-  <Algorithm Name="SetTokenFalse" >
-    <Other Language="Java" Text="Token.value=false;&#10;" />
   </Algorithm>
   </BasicFB>
 </FBType>

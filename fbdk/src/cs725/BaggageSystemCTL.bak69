@@ -186,7 +186,7 @@
         <FB Name="FCOne" Type="TwoConCtl" x="2823.5293" y="100.0" >
           <Parameter Name="Candidate" Value="1" />
         </FB>
-        <FB Name="TCOne" Type="ThreeConCtl" x="4635.294" y="5435.294" >
+        <FB Name="TCOne" Type="ThreeConCtl" x="4594.1177" y="4947.0586" >
           <Parameter Name="Candidate" Value="1" />
           <Parameter Name="InitToken" Value="0" />
         </FB>
@@ -210,7 +210,7 @@
           <Parameter Name="PE" Value="0" />
         </FB>
         <FB Name="Central_Server" Type="Central_Server" x="2005.8823" y="588.2353" />
-        <FB Name="FCTwoRing" Type="TwoConCtlRing" x="2847.0588" y="4388.2354" >
+        <FB Name="FCTwoRing" Type="TwoConCtlRing" x="2717.647" y="4329.4116" >
           <Parameter Name="Candidate" Value="1" />
           <Parameter Name="InitToken" Value="1" />
         </FB>
@@ -222,8 +222,8 @@
           <Connection Source="BagInThree.INITO" Destination="BagIn3.INIT" dx1="58.82353" />
           <Connection Source="BagIn1.INITO" Destination="BagInTwo.INIT" dx1="29.411764" dx2="0.0" dy="-70.588234" />
           <Connection Source="BagInTwo.INITO" Destination="BagIn2.INIT" dx1="47.058823" />
-          <Connection Source="PE.IND" Destination="TCOne.REQ" dx1="800.0" dx2="126.666664" dy="-2206.6665" />
-          <Connection Source="TCOne.CNF" Destination="ConControl.REQ" dx1="1094.1177" />
+          <Connection Source="PE.IND" Destination="TCOne.REQ" dx1="1294.1177" dx2="126.666664" dy="-2206.6665" />
+          <Connection Source="TCOne.CNF" Destination="ConControl.REQ" dx1="29.411764" />
           <Connection Source="FCThree.CNF" Destination="ConControl.REQ" dx1="170.58823" />
           <Connection Source="BagInTwo.IND" Destination="BagIn2.REQ" dx1="47.058823" />
           <Connection Source="PE.IND" Destination="FCOne.REQ" dx1="176.47058" dx2="129.41176" dy="-2205.8823" />
@@ -252,8 +252,6 @@
           <Connection Source="PE.INITO" Destination="FCTwoRing.INIT" dx1="1529.4117" />
           <Connection Source="PE.IND" Destination="FCTwoRing.REQ" dx1="1488.2352" />
           <Connection Source="FCTwoRing.CNF" Destination="ConControl.REQ" dx1="1141.1764" />
-          <Connection Source="FCTwoRing.TokenEventOut" Destination="TCOne.TokenEvent" dx1="935.2941" />
-          <Connection Source="TCOne.TokenEventOut" Destination="FCTwoRing.TokenEvent" dx1="529.41174" dx2="782.3529" dy="1229.4117" />
         </EventConnections>
         <DataConnections>
           <Connection Source="TCOne.MotoRotate1" Destination="ConControl.SD_3" dx1="29.411764" dx2="629.41174" dy="-58.82353" />
@@ -273,9 +271,11 @@
           <Connection Source="Central_Server.Enable1" Destination="FCOne.Block" dx1="105.882355" />
           <Connection Source="Central_Server.Enable2" Destination="FCThree.Block" dx1="1100.0" />
           <Connection Source="PE.RD_5" Destination="TCOne.PE" dx1="1582.3529" />
-          <Connection Source="PE.RD_8" Destination="TCOne.PE13CS" dx1="941.17645" />
+          <Connection Source="PE.RD_8" Destination="TCOne.PE13CS" dx1="1347.0588" />
           <Connection Source="FCTwoRing.MotoRotate1" Destination="ConControl.SD_8" dx1="1258.8235" />
           <Connection Source="FCTwoRing.MotoRotate2" Destination="ConControl.SD_9" dx1="1282.3529" />
+          <Connection Source="FCTwoRing.TokenOut" Destination="TCOne.TokenIn" dx1="300.0" dx2="252.94118" dy="852.94116" />
+          <Connection Source="TCOne.TokenOut" Destination="FCTwoRing.TokenIn" dx1="111.7647" dx2="158.82353" dy="205.88235" />
           <Connection Source="FCTwoRing.BlockCon" Destination="TCOne.Block" dx1="252.94118" />
           <Connection Source="TCOne.BlockCon" Destination="FCTwoRing.Block" dx1="311.7647" dx2="658.8235" dy="200.0" />
           <Connection Source="PE.RD_8" Destination="FCTwoRing.PE13CS" dx1="464.70587" />

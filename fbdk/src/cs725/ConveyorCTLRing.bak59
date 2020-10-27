@@ -85,7 +85,6 @@
       </ECState>
       <ECState Name="PassToken" x="6047.0586" y="2758.8235" >
         <ECAction Algorithm="START" Output="TokenEventOut" />
-        <ECAction Algorithm="SetTokenFalse" />
       </ECState>
       <ECState Name="AwaitToken" x="5329.4116" y="558.82355" >
         <ECAction Algorithm="STOP" Output="CNF" />
@@ -137,9 +136,6 @@
   </Algorithm>
   <Algorithm Name="SetToken" >
     <Other Language="Java" Text="Token.value = true;&#10;MotoRotate.value=true;&#10;" />
-  </Algorithm>
-  <Algorithm Name="SetTokenFalse" >
-    <Other Language="Java" Text="Token.value=false;&#10;" />
   </Algorithm>
   </BasicFB>
 </FBType>
