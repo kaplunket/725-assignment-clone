@@ -97,10 +97,6 @@
         <ECAction Algorithm="TokenFree" Output="TokenEventOut" />
         <ECAction Algorithm="STOP" Output="CNF" />
       </ECState>
-      <ECState Name="ACcessCriticalWaitBagClear" x="4123.5293" y="1082.3529" >
-        <ECAction Output="CNF" />
-        <ECAction Algorithm="TokenInUse" Output="TokenEventOut" />
-      </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2511.7646" y="370.58823" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="2317.647" y="152.94118" />
       <ECTransition Source="AccessCritical" Destination="PassToken" Condition="REQ&#38;!PE13CS" x="6305.8823" y="2129.4116" />
@@ -109,10 +105,9 @@
       <ECTransition Source="START" Destination="PassToken" Condition="REQ&#38;PE&#38;TokenIn" x="5458.823" y="2076.4705" />
       <ECTransition Source="AwaitToken" Destination="AccessCritical" Condition="REQ&#38;TokenIn" x="5935.294" y="1047.0588" />
       <ECTransition Source="Bag2Access" Destination="ReleaseToken" Condition="REQ&#38;!PE13CS" x="7176.47" y="423.52942" />
+      <ECTransition Source="START" Destination="AccessCritical" Condition="REQ&#38;!PE&#38;TokenIn" x="4582.353" y="1147.0588" />
       <ECTransition Source="AccessCritical" Destination="Bag2Access" Condition="REQ&#38;!PE" x="7429.4116" y="888.2353" />
       <ECTransition Source="ReleaseToken" Destination="AwaitToken" Condition="1" x="5694.1177" y="423.52942" />
-      <ECTransition Source="START" Destination="ACcessCriticalWaitBagClear" Condition="REQ&#38;!PE&#38;TokenIn" x="3405.8823" y="811.7647" />
-      <ECTransition Source="ACcessCriticalWaitBagClear" Destination="AccessCritical" Condition="REQ&#38;PE" x="4664.7056" y="1347.0588" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <Other Language="Java" Text="MotoRotate.value=true;&#10;Block.value=false;&#10;TokenOut.value = InitToken.value;&#10;System.out.println(this+&#34; &#34;+MotoRotate.value);&#10;System.out.println(MotoRotate.value);&#10;" />

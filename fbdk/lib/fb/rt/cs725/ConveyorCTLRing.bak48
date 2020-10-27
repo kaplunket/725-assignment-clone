@@ -205,9 +205,7 @@ state_AwaitToken();
 private static final int index_ACcessCriticalWaitBagClear = 8;
 private void state_ACcessCriticalWaitBagClear(){
   eccState = index_ACcessCriticalWaitBagClear;
-  CNF.serviceEvent(this);
-  alg_TokenInUse();
-  TokenEventOut.serviceEvent(this);
+    if(PE.value) state_AccessCritical();
 }
 /** The default constructor. */
 public ConveyorCTLRing(){
@@ -237,7 +235,6 @@ public ConveyorCTLRing(){
     else if ((eccState == index_Bag2Access) && (!PE13CS.value)) state_ReleaseToken();
     else if ((eccState == index_AccessCritical) && (!PE.value)) state_Bag2Access();
     else if ((eccState == index_START) && (!PE.value&TokenIn.value)) state_ACcessCriticalWaitBagClear();
-    else if ((eccState == index_ACcessCriticalWaitBagClear) && (PE.value)) state_AccessCritical();
   }
 /** Services the CAS_STOP event. */
   public void service_CAS_STOP(){

@@ -112,7 +112,7 @@
       <ECTransition Source="AccessCritical" Destination="Bag2Access" Condition="REQ&#38;!PE" x="7429.4116" y="888.2353" />
       <ECTransition Source="ReleaseToken" Destination="AwaitToken" Condition="1" x="5694.1177" y="423.52942" />
       <ECTransition Source="START" Destination="ACcessCriticalWaitBagClear" Condition="REQ&#38;!PE&#38;TokenIn" x="3405.8823" y="811.7647" />
-      <ECTransition Source="ACcessCriticalWaitBagClear" Destination="AccessCritical" Condition="REQ&#38;PE" x="4664.7056" y="1347.0588" />
+      <ECTransition Source="ACcessCriticalWaitBagClear" Destination="AccessCritical" Condition="PE" x="4664.7056" y="1347.0588" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
     <Other Language="Java" Text="MotoRotate.value=true;&#10;Block.value=false;&#10;TokenOut.value = InitToken.value;&#10;System.out.println(this+&#34; &#34;+MotoRotate.value);&#10;System.out.println(MotoRotate.value);&#10;" />
