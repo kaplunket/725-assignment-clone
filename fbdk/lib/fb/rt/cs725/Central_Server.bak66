@@ -151,12 +151,6 @@ private void state_Update_Con(){
     if(Con2.value|Con1.value) state_Release();
     else if(!Con2.value&!Con1.value) state_START();
 }
-private static final int index_REQ2 = 6;
-private void state_REQ2(){
-  eccState = index_REQ2;
-  alg_REQ2();
-state_Update_Con();
-}
 /** The default constructor. */
 public Central_Server(){
     super();
@@ -177,8 +171,7 @@ public Central_Server(){
   }
 /** Services the REQ event. */
   public void service_REQ(){
-    if ((eccState == index_START) && ((!Con1.value==Con1_prev.value))) state_REQ();
-    else if ((eccState == index_START) && ((!Con2.value==Con2_prev.value))) state_REQ2();
+    if ((eccState == index_START) && (((Con1.value!==Con1_prev.value)|(Con2.value!==Con2_prev.value)))) state_REQ();
   }
 /** Services the Release event. */
   public void service_Release(){
@@ -205,7 +198,7 @@ System.out.print("Conveyor 1 output status:");
 System.out.println(Enable1.value);
 System.out.print("Conveyor 2 output status:");
 System.out.println(Enable2.value);
-if (Con1.value){
+if (Con1.value && Con1.value != Con1_prev.value){
 if (queue1.value == 0){
 queue1.value=1;
 }else if (queue2.value == 0){
@@ -215,6 +208,17 @@ queue3.value=1;
 }
 Enable1.value=true;
 }
+if (Con2.value && Con2.value != Con2_prev.value){
+if (queue1.value == 0){
+queue1.value=2;
+}else if (queue2.value == 0){
+queue2.value=2;
+}else{
+queue3.value=2;
+}
+Enable2.value=true;
+}
+
 }
   /** ALGORITHM Release IN Java*/
 public void alg_Release(){
@@ -261,28 +265,5 @@ public void alg_Con_Prev_Update(){
 Con1_prev.value=Con1.value;
 Con2_prev.value=Con2.value;
 
-}
-  /** ALGORITHM REQ2 IN Java*/
-public void alg_REQ2(){
-System.out.println("Request to server");
-System.out.print("Conveyor 1 input status:");
-System.out.println(Con1.value);
-System.out.print("Conveyor 2 input status:");
-System.out.println(Con2.value);
-
-System.out.print("Conveyor 1 output status:");
-System.out.println(Enable1.value);
-System.out.print("Conveyor 2 output status:");
-System.out.println(Enable2.value);
-if (Con2.value){
-if (queue1.value == 0){
-queue1.value=2;
-}else if (queue2.value == 0){
-queue2.value=2;
-}else{
-queue3.value=2;
-}
-Enable2.value=true;
-}
 }
 }

@@ -177,8 +177,8 @@ public Central_Server(){
   }
 /** Services the REQ event. */
   public void service_REQ(){
-    if ((eccState == index_START) && ((!Con1.value==Con1_prev.value))) state_REQ();
-    else if ((eccState == index_START) && ((!Con2.value==Con2_prev.value))) state_REQ2();
+    if ((eccState == index_START) && ((Con1.value!==Con1_prev.value))) state_REQ();
+    else if ((eccState == index_START) && ((Con2.value!==Con2_prev.value))) state_REQ2();
   }
 /** Services the Release event. */
   public void service_Release(){
@@ -205,7 +205,7 @@ System.out.print("Conveyor 1 output status:");
 System.out.println(Enable1.value);
 System.out.print("Conveyor 2 output status:");
 System.out.println(Enable2.value);
-if (Con1.value){
+if (Con1.value && Con1.value != Con1_prev.value){
 if (queue1.value == 0){
 queue1.value=1;
 }else if (queue2.value == 0){
@@ -274,7 +274,7 @@ System.out.print("Conveyor 1 output status:");
 System.out.println(Enable1.value);
 System.out.print("Conveyor 2 output status:");
 System.out.println(Enable2.value);
-if (Con2.value){
+if (Con2.value && Con2.value != Con2_prev.value){
 if (queue1.value == 0){
 queue1.value=2;
 }else if (queue2.value == 0){

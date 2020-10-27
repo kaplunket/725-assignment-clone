@@ -177,8 +177,8 @@ public Central_Server(){
   }
 /** Services the REQ event. */
   public void service_REQ(){
-    if ((eccState == index_START) && ((!Con1.value==Con1_prev.value))) state_REQ();
-    else if ((eccState == index_START) && ((!Con2.value==Con2_prev.value))) state_REQ2();
+    if ((eccState == index_START) && ((Con1.value==Con1_prev.value))) state_REQ();
+    else if ((eccState == index_START) && ((Con2.value==Con2_prev.value))) state_REQ2();
   }
 /** Services the Release event. */
   public void service_Release(){

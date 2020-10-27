@@ -85,7 +85,7 @@
       <ECTransition Source="REQ" Destination="Update_Con" Condition="1" x="1447.0588" y="1552.9412" />
       <ECTransition Source="Update_Con" Destination="Release" Condition="Con2 | Con1" x="4035.294" y="1452.9412" />
       <ECTransition Source="Update_Con" Destination="START" Condition="!Con2 &#38; !Con1" x="382.35294" y="982.3529" />
-      <ECTransition Source="START" Destination="REQ2" Condition="REQ&#38;(!Con2 = Con2_prev)" x="2082.3528" y="1117.6471" />
+      <ECTransition Source="START" Destination="REQ2" Condition="REQ&#38;(!Con2 == Con2_prev)" x="2082.3528" y="1117.6471" />
       <ECTransition Source="REQ2" Destination="Update_Con" Condition="1" x="2082.3528" y="1582.3529" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
