@@ -267,7 +267,7 @@
           <Connection Source="PE.RD_1" Destination="FCOne.PE" dx1="1111.7646" />
           <Connection Source="PE.RD_3" Destination="FCThree.PE" dx1="2105.8823" />
           <Connection Source="Central_Server.Enable1" Destination="FCOne.Block" dx1="105.882355" />
-          <Connection Source="Central_Server.Enable2" Destination="FCThree.Block" dx1="1100.0" />
+          <Connection Source="Central_Server.Enable2" Destination="FCThree.Block" dx1="505.88235" />
           <Connection Source="PE.RD_5" Destination="TCOne.PE" dx1="1582.3529" />
           <Connection Source="PE.RD_8" Destination="TCOne.PE13CS" dx1="1347.0588" />
           <Connection Source="FCTwoRing.MotoRotate1" Destination="ConControl.SD_8" dx1="1258.8235" />
@@ -276,8 +276,8 @@
           <Connection Source="TCOne.TokenOut" Destination="FCTwoRing.TokenIn" dx1="111.7647" dx2="158.82353" dy="205.88235" />
           <Connection Source="FCTwoRing.BlockCon" Destination="TCOne.Block" dx1="252.94118" />
           <Connection Source="TCOne.BlockCon" Destination="FCTwoRing.Block" dx1="311.7647" dx2="658.8235" dy="200.0" />
+          <Connection Source="PE.RD_5" Destination="FCTwoRing.PE" dx1="500.0" />
           <Connection Source="PE.RD_8" Destination="FCTwoRing.PE13CS" dx1="464.70587" />
-          <Connection Source="PE.RD_2" Destination="FCTwoRing.PE" dx1="541.17645" />
         </DataConnections>
       </FBNetwork>
     </Resource>

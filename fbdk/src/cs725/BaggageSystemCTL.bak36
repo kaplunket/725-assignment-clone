@@ -276,8 +276,8 @@
           <Connection Source="TCOne.TokenOut" Destination="FCTwoRing.TokenIn" dx1="111.7647" dx2="158.82353" dy="205.88235" />
           <Connection Source="FCTwoRing.BlockCon" Destination="TCOne.Block" dx1="252.94118" />
           <Connection Source="TCOne.BlockCon" Destination="FCTwoRing.Block" dx1="311.7647" dx2="658.8235" dy="200.0" />
+          <Connection Source="PE.RD_5" Destination="FCTwoRing.PE" dx1="500.0" />
           <Connection Source="PE.RD_8" Destination="FCTwoRing.PE13CS" dx1="464.70587" />
-          <Connection Source="PE.RD_2" Destination="FCTwoRing.PE" dx1="541.17645" />
         </DataConnections>
       </FBNetwork>
     </Resource>

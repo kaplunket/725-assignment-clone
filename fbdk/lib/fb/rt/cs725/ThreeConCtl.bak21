@@ -134,11 +134,9 @@ public class ThreeConCtl extends FBInstance
     }
 /** Connect the given variable to the input variable TokenIn
   * @param newIV The variable to connect
-  * @throws FBRManagementException An internal connection failed.
  */
-  public void connect_TokenIn(BOOL newIV) throws FBRManagementException{
+  public void connect_TokenIn(BOOL newIV){
     TokenIn = newIV;
-    FC11Ring.connectIVNoException("TokenIn",TokenIn);
     }
 /** FB FC12 */
   protected ConveyorCTL FC12 = new ConveyorCTL() ;
@@ -161,8 +159,6 @@ public ThreeConCtl(){
     FC11Ring.STOP.connectTo(STOP);
     FC11Ring.START.connectTo(START);
     FC11Ring.INITO.connectTo(FC12.INIT);
-    TokenEvent.connectTo(FC11Ring.TokenEvent);
-    FC11Ring.TokenEventOut.connectTo(TokenEventOut);
     MotoRotate3 = (BOOL)FC13.ovNamedNoException("MotoRotate");
     MotoRotate2 = (BOOL)FC12.ovNamedNoException("MotoRotate");
     FC11Ring.connectIVNoException("PE",PE);
@@ -170,8 +166,6 @@ public ThreeConCtl(){
     FC11Ring.connectIVNoException("Candidate",Candidate);
     MotoRotate1 = (BOOL)FC11Ring.ovNamedNoException("MotoRotate");
     BlockCon = (BOOL)FC11Ring.ovNamedNoException("BlockCon");
-    TokenOut = (BOOL)FC11Ring.ovNamedNoException("TokenOut");
-    FC11Ring.connectIVNoException("TokenIn",TokenIn);
     FC12.PE.initializeNoException("0");
     FC12.Block.initializeNoException("0");
     FC12.Candidate.initializeNoException("0");
