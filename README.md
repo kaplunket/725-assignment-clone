@@ -8,9 +8,9 @@ particular, the mutual exclusion algorithms considered are:
 * Multicast
 
 ## Each Section
-The first critical section (considering conveyors 2 and 6 going into conveyor 7) is implemented using central server.
-The second critical section (considering conveyors 4 & 7 going into conveyor 8) is implemented using ring token.
-The third critical section (considering conveyors 8 & 11 going into conveyor 9)) is implemented using multicast.
+The first critical section (considering conveyors 2 and 6 going into conveyor 7) is implemented using central server. Done by kazuki Saegusa
+The second critical section (considering conveyors 4 & 7 going into conveyor 8) is implemented using ring token. Done by Rishab Goswami
+The third critical section (considering conveyors 8 & 11 going into conveyor 9)) is implemented using multicast. Done by Matthew Eden
 
 ## Running The Assignment
 In order to run this assignment (using ubuntu), first extract the compsys-725-assignment 2. Inside, go into the fbdk directory. once in the directory open the terminal and run:
