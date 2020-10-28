@@ -81,7 +81,7 @@
       <ECTransition Source="CAS_STOP" Destination="START" Condition="1" x="1405.8823" y="582.3529" />
     </ECC>
   <Algorithm Name="INIT" Comment="Initialization algorithm" >
-    <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;" />
+    <ST Text="MotoRotate := TRUE;&#10;Block := FALSE;&#10;&#10;System.out.println(this + &#34; &#34; + MotoRotate);&#10;System.out.println(MotoRotate);&#10;" />
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
     <ST Text="IF Candidate THEN&#10;IF lastPE !:= PE THEN&#10;IF NOT PE THEN&#10;BlockCon:= TRUE;&#10;ELSE&#10;BlockCon:=FALSE;&#10;END_IF&#10;lastPE := PE;&#10;END_IF&#10;IF lastBlock !:= Block THEN&#10;IF Block THEN&#10;STOP.serviceEvent(this);&#10;MotoRotate := FALSE;&#10;ELSE&#10;START.serviceEvent(this);&#10;MotoRotate := TRUE;&#10;END_IF&#10;lastBlock := Block;&#10;END_IF&#10;END_IF&#10;" />

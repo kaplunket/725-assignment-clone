@@ -279,22 +279,16 @@ public ConveyorCTLMulticast(){
 public void alg_INIT(){
 MotoRotate.value=true;
 Block.value=false;
-
-System.out.println(this+" "+MotoRotate.value);
-System.out.println(MotoRotate.value);
 }
   /** ALGORITHM REQ IN ST*/
 public void alg_REQ(){
-System.out.println(this+" -> Candidate"+Candidate.value);
 if(Candidate.value){
 if(lastPE.value!=PE.value){
 if(!PE.value){
 BlockCon.value=true;
-System.out.println("BlockCon = true");
 }
 else{
 BlockCon.value=false;
-System.out.println("BlockCon = false");
 }
 lastPE.value=PE.value;
 }
@@ -302,12 +296,10 @@ if(lastBlock.value!=Block.value){
 if(Block.value){
 STOP.serviceEvent(this);
 MotoRotate.value=false;
-System.out.println("Cas Stop");
 }
 else{
 START.serviceEvent(this);
 MotoRotate.value=true;
-System.out.println("Cas Start");
 }
 lastBlock.value=Block.value;
 }
@@ -316,16 +308,10 @@ lastBlock.value=Block.value;
   /** ALGORITHM START IN ST*/
 public void alg_START(){
 MotoRotate.value=true;
-System.out.println(this+" Start "+MotoRotate.value);
-
-System.out.println("Start "+MotoRotate.value);
 }
   /** ALGORITHM STOP IN ST*/
 public void alg_STOP(){
 MotoRotate.value=false;
-System.out.println(this+" Stop "+MotoRotate.value);
-
-System.out.println("Stop "+MotoRotate.value);
 }
   /** ALGORITHM MAKE_REQUEST IN Java*/
 public void alg_MAKE_REQUEST(){

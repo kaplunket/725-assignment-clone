@@ -242,7 +242,6 @@ Enable1.value=false;
 Enable2.value=false;
 }
 }
-
 }
   /** ALGORITHM Check_Token_Release IN Java*/
 public void alg_Check_Token_Release(){

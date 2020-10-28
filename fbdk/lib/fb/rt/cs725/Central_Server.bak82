@@ -211,13 +211,9 @@ queue3.value=1;
 }
 Enable1.value=true;
 }
-
 }
   /** ALGORITHM Release IN Java*/
 public void alg_Release(){
-if(token.value){
-if(queue1.value!=0){
-
 System.out.println("QUEUE:");
 System.out.println(queue1);
 System.out.println(queue2);
@@ -226,6 +222,8 @@ System.out.println(queue3);
 System.out.print("RELEASE SENSOR:");
 System.out.println(PE.value);
 
+if(token.value){
+if(queue1.value!=0){
 if(queue1.value==1){
 Enable1.value=false;
 System.out.print("Input 1 has accessed section");
@@ -279,6 +277,5 @@ queue3.value=2;
 }
 Enable2.value=true;
 }
-
 }
 }
