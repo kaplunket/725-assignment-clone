@@ -57,7 +57,6 @@
       <VarDeclaration Name="TokenIn" Type="BOOL" />
       <VarDeclaration Name="PE13CS" Type="BOOL" />
       <VarDeclaration Name="InitToken" Type="BOOL" />
-      <VarDeclaration Name="ConveyorNum" Type="INT" />
     </InputVars>
     <OutputVars>
       <VarDeclaration Name="MotoRotate" Type="BOOL" Comment="Output event qualifier" />
@@ -78,34 +77,30 @@
         <ECAction Algorithm="INIT" Output="INITO" />
         <ECAction Output="CNF" />
       </ECState>
+      <ECState Name="REQ" Comment="Normal execution" x="511.7647" y="3488.235" >
+        <ECAction Algorithm="REQ" Output="CNF" />
+      </ECState>
       <ECState Name="AccessCritical" x="6047.0586" y="1447.0588" >
         <ECAction Algorithm="START" Output="CNF" />
-        <ECAction Output="START" />
-        <ECAction Algorithm="PrintToken" />
-        <ECAction Algorithm="PrintCriticalSection" />
       </ECState>
       <ECState Name="PassToken" x="6047.0586" y="2758.8235" >
         <ECAction Algorithm="START" Output="TokenEventOut" />
-        <ECAction Algorithm="SetTokenFalse" Output="START" />
+        <ECAction Algorithm="SetTokenFalse" />
       </ECState>
       <ECState Name="AwaitToken" x="5329.4116" y="558.82355" >
         <ECAction Algorithm="STOP" Output="CNF" />
-        <ECAction Output="STOP" />
       </ECState>
       <ECState Name="Bag2Access" x="8147.0586" y="605.8823" >
         <ECAction Algorithm="STOP" Output="CNF" />
-        <ECAction Output="STOP" />
       </ECState>
       <ECState Name="ReleaseToken" x="6411.7646" y="170.58823" >
         <ECAction Algorithm="STOP" Output="TokenEventOut" />
-        <ECAction Output="STOP" />
       </ECState>
       <ECState Name="ACcessCriticalWaitBagClear" x="4123.5293" y="1082.3529" >
         <ECAction Output="CNF" />
       </ECState>
       <ECState Name="SetToken" x="1547.0588" y="1923.5294" >
         <ECAction Algorithm="SetToken" Output="TokenEventOut" />
-        <ECAction Algorithm="PrintToken" />
       </ECState>
       <ECTransition Source="START" Destination="INIT" Condition="INIT" x="2511.7646" y="370.58823" />
       <ECTransition Source="INIT" Destination="START" Condition="1" x="2317.647" y="152.94118" />
@@ -134,17 +129,17 @@
   <Algorithm Name="STOP" >
     <Other Language="Java" Text="MotoRotate.value=false;&#10;System.out.println(&#34;hello  &#34; + this+&#34; Stop &#34;+MotoRotate.value);&#10;&#10;System.out.println(&#34;Stop &#34;+MotoRotate.value);&#10;" />
   </Algorithm>
+  <Algorithm Name="TokenInUse" >
+    <Other Language="Java" Text="" />
+  </Algorithm>
+  <Algorithm Name="TokenFree" >
+    <Other Language="Java" Text="TokenOut.value = true;&#10;" />
+  </Algorithm>
   <Algorithm Name="SetToken" >
     <Other Language="Java" Text="Token.value = true;&#10;MotoRotate.value=true;&#10;" />
   </Algorithm>
   <Algorithm Name="SetTokenFalse" >
     <Other Language="Java" Text="Token.value=false;&#10;" />
-  </Algorithm>
-  <Algorithm Name="PrintCriticalSection" >
-    <Other Language="Java" Text="System.out.println(&#34;Conveyor &#34; + ConveyorNum.value + &#34; has access to the critical section&#34;);&#10;" />
-  </Algorithm>
-  <Algorithm Name="PrintToken" >
-    <Other Language="Java" Text="System.out.println(&#34;Conveyor &#34; + ConveyorNum.value + &#34; has the token&#34;);&#10;" />
   </Algorithm>
   </BasicFB>
 </FBType>

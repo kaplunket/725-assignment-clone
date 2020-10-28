@@ -141,10 +141,10 @@
     <Other Language="Java" Text="Token.value=false;&#10;" />
   </Algorithm>
   <Algorithm Name="PrintCriticalSection" >
-    <Other Language="Java" Text="System.out.println(&#34;Conveyor &#34; + ConveyorNum.value + &#34; has access to the critical section&#34;);&#10;" />
+    <ST Text="System.out.println(&#34;Conveyor &#34; + ConveyorNum.value + &#34; has access to the critical section&#34;);&#10;" />
   </Algorithm>
   <Algorithm Name="PrintToken" >
-    <Other Language="Java" Text="System.out.println(&#34;Conveyor &#34; + ConveyorNum.value + &#34; has the token&#34;);&#10;" />
+    <ST Text="System.out.println(&#34;Conveyor &#34; + ConveyorNum.value + &#34; has the token&#34;);&#10;" />
   </Algorithm>
   </BasicFB>
 </FBType>

@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK ConveyorCTLRing
   * @author JHC
-  * @version 20201028/JHC
+  * @version 20201027/JHC
   */
 public class ConveyorCTLRing extends FBInstance
 {
@@ -21,8 +21,6 @@ public class ConveyorCTLRing extends FBInstance
   public BOOL PE13CS = new BOOL();
 /** VAR InitToken */
   public BOOL InitToken = new BOOL();
-/** VAR ConveyorNum */
-  public INT ConveyorNum = new INT();
 /** Output event qualifier */
   public BOOL MotoRotate = new BOOL();
 /** VAR BlockCon */
@@ -89,7 +87,6 @@ public class ConveyorCTLRing extends FBInstance
     if("TokenIn".equals(s)) return TokenIn;
     if("PE13CS".equals(s)) return PE13CS;
     if("InitToken".equals(s)) return InitToken;
-    if("ConveyorNum".equals(s)) return ConveyorNum;
     return super.ivNamed(s);}
 /** {@inheritDoc}
 * @param s {@inheritDoc}
@@ -113,7 +110,6 @@ public class ConveyorCTLRing extends FBInstance
     else if("TokenIn".equals(ivName)) connect_TokenIn((BOOL)newIV);
     else if("PE13CS".equals(ivName)) connect_PE13CS((BOOL)newIV);
     else if("InitToken".equals(ivName)) connect_InitToken((BOOL)newIV);
-    else if("ConveyorNum".equals(ivName)) connect_ConveyorNum((INT)newIV);
     else super.connectIV(ivName, newIV);
     }
 /** Connect the given variable to the input variable PE
@@ -152,12 +148,6 @@ public class ConveyorCTLRing extends FBInstance
   public void connect_InitToken(BOOL newIV){
     InitToken = newIV;
     }
-/** Connect the given variable to the input variable ConveyorNum
-  * @param newIV The variable to connect
- */
-  public void connect_ConveyorNum(INT newIV){
-    ConveyorNum = newIV;
-    }
 private static final int index_START = 0;
 private void state_START(){
   eccState = index_START;
@@ -170,57 +160,55 @@ private void state_INIT(){
   CNF.serviceEvent(this);
 state_START();
 }
-private static final int index_AccessCritical = 2;
+private static final int index_REQ = 2;
+private void state_REQ(){
+  eccState = index_REQ;
+  alg_REQ();
+  CNF.serviceEvent(this);
+}
+private static final int index_AccessCritical = 3;
 private void state_AccessCritical(){
   eccState = index_AccessCritical;
   alg_START();
   CNF.serviceEvent(this);
-  START.serviceEvent(this);
-  alg_PrintToken();
-  alg_PrintCriticalSection();
 }
-private static final int index_PassToken = 3;
+private static final int index_PassToken = 4;
 private void state_PassToken(){
   eccState = index_PassToken;
   alg_START();
   TokenEventOut.serviceEvent(this);
   alg_SetTokenFalse();
-  START.serviceEvent(this);
 state_START();
 }
-private static final int index_AwaitToken = 4;
+private static final int index_AwaitToken = 5;
 private void state_AwaitToken(){
   eccState = index_AwaitToken;
   alg_STOP();
   CNF.serviceEvent(this);
-  STOP.serviceEvent(this);
 }
-private static final int index_Bag2Access = 5;
+private static final int index_Bag2Access = 6;
 private void state_Bag2Access(){
   eccState = index_Bag2Access;
   alg_STOP();
   CNF.serviceEvent(this);
-  STOP.serviceEvent(this);
 }
-private static final int index_ReleaseToken = 6;
+private static final int index_ReleaseToken = 7;
 private void state_ReleaseToken(){
   eccState = index_ReleaseToken;
   alg_STOP();
   TokenEventOut.serviceEvent(this);
-  STOP.serviceEvent(this);
 state_AwaitToken();
 }
-private static final int index_ACcessCriticalWaitBagClear = 7;
+private static final int index_ACcessCriticalWaitBagClear = 8;
 private void state_ACcessCriticalWaitBagClear(){
   eccState = index_ACcessCriticalWaitBagClear;
   CNF.serviceEvent(this);
 }
-private static final int index_SetToken = 8;
+private static final int index_SetToken = 9;
 private void state_SetToken(){
   eccState = index_SetToken;
   alg_SetToken();
   TokenEventOut.serviceEvent(this);
-  alg_PrintToken();
 state_START();
 }
 /** The default constructor. */
@@ -319,6 +307,15 @@ System.out.println("hello  " + this+" Stop "+MotoRotate.value);
 System.out.println("Stop "+MotoRotate.value);
 
 }
+  /** ALGORITHM TokenInUse IN Java*/
+public void alg_TokenInUse(){
+
+}
+  /** ALGORITHM TokenFree IN Java*/
+public void alg_TokenFree(){
+TokenOut.value = true;
+
+}
   /** ALGORITHM SetToken IN Java*/
 public void alg_SetToken(){
 Token.value = true;
@@ -328,16 +325,6 @@ MotoRotate.value=true;
   /** ALGORITHM SetTokenFalse IN Java*/
 public void alg_SetTokenFalse(){
 Token.value=false;
-
-}
-  /** ALGORITHM PrintCriticalSection IN Java*/
-public void alg_PrintCriticalSection(){
-System.out.println("Conveyor " + ConveyorNum.value + " has access to the critical section");
-
-}
-  /** ALGORITHM PrintToken IN Java*/
-public void alg_PrintToken(){
-System.out.println("Conveyor " + ConveyorNum.value + " has the token");
 
 }
 }

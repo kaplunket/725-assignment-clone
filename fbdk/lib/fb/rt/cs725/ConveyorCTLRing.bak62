@@ -330,14 +330,12 @@ public void alg_SetTokenFalse(){
 Token.value=false;
 
 }
-  /** ALGORITHM PrintCriticalSection IN Java*/
+  /** ALGORITHM PrintCriticalSection IN ST*/
 public void alg_PrintCriticalSection(){
-System.out.println("Conveyor " + ConveyorNum.value + " has access to the critical section");
-
+System.out.println("Conveyor "+ConveyorNum.value.value+" has access to the critical section");
 }
-  /** ALGORITHM PrintToken IN Java*/
+  /** ALGORITHM PrintToken IN ST*/
 public void alg_PrintToken(){
-System.out.println("Conveyor " + ConveyorNum.value + " has the token");
-
+System.out.println("Conveyor "+ConveyorNum.value.value+" has the token");
 }
 }

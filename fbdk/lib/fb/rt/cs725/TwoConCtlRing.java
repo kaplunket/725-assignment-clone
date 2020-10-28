@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK TwoConCtlRing
   * @author JHC
-  * @version 20201027/JHC
+  * @version 20201028/JHC
   */
 public class TwoConCtlRing extends FBInstance
 {
@@ -183,6 +183,7 @@ public TwoConCtlRing(){
     FC11.PE.initializeNoException("0");
     FC11.Block.initializeNoException("0");
     FC11.Candidate.initializeNoException("0");
+    FC12Ring.ConveyorNum.initializeNoException("4");
   }
 /** {@inheritDoc}
  * @param fbName {@inheritDoc}

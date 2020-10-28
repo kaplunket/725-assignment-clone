@@ -75,7 +75,7 @@
       <Parameter Name="Candidate" Value="0" />
     </FB>
     <FB Name="FC11Ring" Type="ConveyorCTLRing" x="576.4706" y="152.94118" >
-      <Parameter Name="ConveyorNum" Value="7" />
+      <Parameter Name="ConveyorNum" Value="4" />
     </FB>
     <EventConnections>
       <Connection Source="FC12.INITO" Destination="FC13.INIT" dx1="476.47058" />

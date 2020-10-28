@@ -194,7 +194,7 @@ public ThreeConCtl(){
     FC13.PE.initializeNoException("0");
     FC13.Block.initializeNoException("0");
     FC13.Candidate.initializeNoException("0");
-    FC11Ring.ConveyorNum.initializeNoException("7");
+    FC11Ring.ConveyorNum.initializeNoException("4");
   }
 /** {@inheritDoc}
  * @param fbName {@inheritDoc}
