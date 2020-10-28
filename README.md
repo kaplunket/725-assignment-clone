@@ -1,3 +1,5 @@
+![BaggageHandlingSystem](assets/BaggageHandlingSystem.png)
+
 # COMPSYS 725 Assignment 2
 
 The second assignment for COMPSYS 725 at the University of Auckland. The assignment is concerned with mutual exclusion algorithms implemented via a simulation
@@ -20,6 +22,8 @@ In order to run this project, navigate to the `fbdk` directory via terminal. Onc
 java -jar editor.jar
 ```
 You will need to accept the terms and conditions before proceeding. Once in the main window, open the main file located at `cs725/BaggageSystemCTL.sys`. After successfully loading that file into the editor, launch the configuration using the green play button on the top bar. You can expect to see two windows; a view window illustrating the arrangement of conveyors and an 'HMI' window which will allow the spawning of bags in the system. Bag 1 sends a bag onto conveyor 1, Bag 2 sends a bag onto conveyor 5, Bag 3 sends a bag onto conveyor 3, Bag 4 sends a bag onto conveyor 10.
+
+![HMIMenu](assets/HMI.png)
 
 ## Contributors
 
