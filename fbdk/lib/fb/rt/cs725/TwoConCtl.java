@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK TwoConCtl
   * @author JHC
-  * @version 20201019/JHC
+  * @version 20201027/JHC
   */
 public class TwoConCtl extends FBInstance
 {

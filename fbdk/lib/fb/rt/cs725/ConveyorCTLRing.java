@@ -306,17 +306,11 @@ lastBlock.value=Block.value;
   /** ALGORITHM START IN Java*/
 public void alg_START(){
 MotoRotate.value=true;
-System.out.println(this+" Start "+MotoRotate.value);
-
-System.out.println("Start "+MotoRotate.value);
 
 }
   /** ALGORITHM STOP IN Java*/
 public void alg_STOP(){
 MotoRotate.value=false;
-System.out.println("hello  " + this+" Stop "+MotoRotate.value);
-
-System.out.println("Stop "+MotoRotate.value);
 
 }
   /** ALGORITHM SetToken IN Java*/

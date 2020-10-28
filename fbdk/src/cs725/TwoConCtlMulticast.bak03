@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd" >
+<FBType Name="TwoConCtlMulticast" Comment="Composite Function Block Type for Multicast" >
+  <Identification Standard="61499-2" />
+  <VersionInfo Organization="Rockwell Automation" Version="0.2" Author="JHC" Date="2003-12-05" Remarks="Renamed from NEWCOMPFB." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.1" Author="JHC" Date="2002-01-08" Remarks="Added DLY FB as example." />
+  <VersionInfo Organization="Rockwell Automation" Version="0.0" Author="JHC" Date="2000-05-27" />
+  <CompilerInfo header="package fb.rt.cs725;" >
+  </CompilerInfo>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Comment="Initialization Request" >
+        <With Var="Candidate" />
+        <With Var="Block" />
+        <With Var="PE" />
+      </Event>
+      <Event Name="REQ" Comment="Normal Execution Request" >
+        <With Var="Candidate" />
+        <With Var="PE" />
+      </Event>
+      <Event Name="START" >
+        <With Var="Block" />
+      </Event>
+      <Event Name="STOP" >
+        <With Var="Block" />
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INITO" Comment="Initialization Confirm" >
+        <With Var="MotoRotate1" />
+        <With Var="MotoRotate2" />
+        <With Var="BlockCon" />
+      </Event>
+      <Event Name="CNF" Comment="Execution Confirmation" >
+        <With Var="MotoRotate1" />
+        <With Var="MotoRotate2" />
+        <With Var="BlockCon" />
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="Candidate" Type="BOOL" />
+      <VarDeclaration Name="Block" Type="BOOL" />
+      <VarDeclaration Name="PE" Type="BOOL" />
+      <VarDeclaration Name="PECS" Type="BOOL" />
+      <VarDeclaration Name="LC" Type="INT" />
+      <VarDeclaration Name="TRUMP" Type="BOOL" />
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MotoRotate1" Type="BOOL" />
+      <VarDeclaration Name="MotoRotate2" Type="BOOL" />
+      <VarDeclaration Name="BlockCon" Type="BOOL" />
+    </OutputVars>
+  </InterfaceList>
+  <FBNetwork >
+    <FB Name="FC11" Type="ConveyorCTL" x="327.77777" y="449.99997" >
+      <Parameter Name="PE" Value="0" />
+      <Parameter Name="Block" Value="0" />
+      <Parameter Name="Candidate" Value="0" />
+    </FB>
+    <FB Name="FC12Multicast" Type="ConveyorCTLMulticast" x="1705.5555" y="449.99997" />
+    <EventConnections>
+      <Connection Source="INIT" Destination="FC11.INIT" dx1="222.22221" />
+      <Connection Source="REQ" Destination="FC11.REQ" dx1="222.22221" />
+      <Connection Source="FC11.INITO" Destination="FC12Multicast.INIT" dx1="216.66666" />
+      <Connection Source="FC12Multicast.START" Destination="FC11.CAS_START" dx1="127.77777" dx2="127.77777" dy="-605.55554" />
+      <Connection Source="FC12Multicast.STOP" Destination="FC11.CAS_STOP" dx1="61.111107" dx2="61.111107" dy="-449.99997" />
+      <Connection Source="REQ" Destination="FC12Multicast.REQ" dx1="1600.0" />
+    </EventConnections>
+    <DataConnections>
+      <Connection Source="FC11.MotoRotate" Destination="MotoRotate1" dx1="1033.3333" />
+      <Connection Source="PE" Destination="FC12Multicast.PE" dx1="1622.2222" />
+      <Connection Source="Block" Destination="FC12Multicast.Block" dx1="1583.3333" />
+      <Connection Source="Candidate" Destination="FC12Multicast.Candidate" dx1="1516.6666" />
+      <Connection Source="FC12Multicast.MotoRotate" Destination="MotoRotate2" dx1="2538.8887" />
+      <Connection Source="FC12Multicast.BlockCon" Destination="BlockCon" dx1="2488.8887" />
+      <Connection Source="PECS" Destination="FC12Multicast.PECS" dx1="1588.8888" />
+      <Connection Source="LC" Destination="FC12Multicast.LC" dx1="1622.2222" />
+      <Connection Source="TRUMP" Destination="FC12Multicast.TRUMP" dx1="1561.1111" />
+    </DataConnections>
+  </FBNetwork>
+</FBType>

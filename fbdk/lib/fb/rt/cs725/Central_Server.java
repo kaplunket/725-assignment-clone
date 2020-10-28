@@ -5,7 +5,7 @@ import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK Central_Server
   * @author JHC
-  * @version 20201027/JHC
+  * @version 20201028/JHC
   */
 public class Central_Server extends FBInstance
 {
@@ -195,16 +195,6 @@ Con2_prev.value=true;
 }
   /** ALGORITHM REQ IN Java*/
 public void alg_REQ(){
-System.out.println("Request to server");
-System.out.print("Conveyor 1 input status:");
-System.out.println(Con1.value);
-System.out.print("Conveyor 2 input status:");
-System.out.println(Con2.value);
-
-System.out.print("Conveyor 1 output status:");
-System.out.println(Enable1.value);
-System.out.print("Conveyor 2 output status:");
-System.out.println(Enable2.value);
 if (Con1.value){
 if (queue1.value == 0){
 queue1.value=1;
@@ -215,17 +205,10 @@ queue3.value=1;
 }
 Enable1.value=true;
 }
+
 }
   /** ALGORITHM Release IN Java*/
 public void alg_Release(){
-System.out.println("QUEUE:");
-System.out.println(queue1);
-System.out.println(queue2);
-System.out.println(queue3);
-
-System.out.print("RELEASE SENSOR:");
-System.out.println(PE.value);
-
 if(token.value){
 if(queue1.value!=0){
 if(queue1.value==1){
@@ -264,16 +247,6 @@ Con2_prev.value=Con2.value;
 }
   /** ALGORITHM REQ2 IN Java*/
 public void alg_REQ2(){
-System.out.println("Request to server");
-System.out.print("Conveyor 1 input status:");
-System.out.println(Con1.value);
-System.out.print("Conveyor 2 input status:");
-System.out.println(Con2.value);
-
-System.out.print("Conveyor 1 output status:");
-System.out.println(Enable1.value);
-System.out.print("Conveyor 2 output status:");
-System.out.println(Enable2.value);
 if (Con2.value){
 if (queue1.value == 0){
 queue1.value=2;
@@ -284,5 +257,6 @@ queue3.value=2;
 }
 Enable2.value=true;
 }
+
 }
 }

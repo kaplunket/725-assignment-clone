@@ -92,10 +92,10 @@
     <Other Language="Java" Text="Enable1.value=false;&#10;Enable2.value=false;&#10;token.value=true;&#10;Con1_prev.value=true;&#10;Con2_prev.value=true;&#10;" />
   </Algorithm>
   <Algorithm Name="REQ" Comment="Normally executed algorithm" >
-    <Other Language="Java" Text="System.out.println(&#34;Request to server&#34;);&#10;System.out.print(&#34;Conveyor 1 input status:&#34;);&#10;System.out.println(Con1.value);&#10;System.out.print(&#34;Conveyor 2 input status:&#34;);&#10;System.out.println(Con2.value);&#10;&#10;System.out.print(&#34;Conveyor 1 output status:&#34;);&#10;System.out.println(Enable1.value);&#10;System.out.print(&#34;Conveyor 2 output status:&#34;);&#10;System.out.println(Enable2.value);&#10;if (Con1.value){&#10;if (queue1.value == 0){&#10;queue1.value=1;&#10;}else if (queue2.value == 0){&#10;queue2.value=1;&#10;}else{&#10;queue3.value=1;&#10;}&#10;Enable1.value=true;&#10;}&#10;" />
+    <Other Language="Java" Text="if (Con1.value){&#10;if (queue1.value == 0){&#10;queue1.value=1;&#10;}else if (queue2.value == 0){&#10;queue2.value=1;&#10;}else{&#10;queue3.value=1;&#10;}&#10;Enable1.value=true;&#10;}&#10;" />
   </Algorithm>
   <Algorithm Name="Release" >
-    <Other Language="Java" Text="System.out.println(&#34;QUEUE:&#34;);&#10;System.out.println(queue1);&#10;System.out.println(queue2);&#10;System.out.println(queue3);&#10;&#10;System.out.print(&#34;RELEASE SENSOR:&#34;);&#10;System.out.println(PE.value);&#10;&#10;if(token.value){&#10;if(queue1.value!=0){&#10;if(queue1.value==1){&#10;Enable1.value=false;&#10;System.out.print(&#34;Input 1 has accessed section&#34;);&#10;}else{&#10;Enable2.value=false;&#10;System.out.print(&#34;Input 2 has accessed section&#34;);&#10;}&#10;token.value=false;&#10;queue1.value=queue2.value;&#10;queue2.value=queue3.value;&#10;queue3.value=0;&#10;}else{&#10;Enable1.value=false;&#10;Enable2.value=false;&#10;}&#10;}&#10;" />
+    <Other Language="Java" Text="if(token.value){&#10;if(queue1.value!=0){&#10;if(queue1.value==1){&#10;Enable1.value=false;&#10;System.out.print(&#34;Input 1 has accessed section&#34;);&#10;}else{&#10;Enable2.value=false;&#10;System.out.print(&#34;Input 2 has accessed section&#34;);&#10;}&#10;token.value=false;&#10;queue1.value=queue2.value;&#10;queue2.value=queue3.value;&#10;queue3.value=0;&#10;}else{&#10;Enable1.value=false;&#10;Enable2.value=false;&#10;}&#10;}&#10;" />
   </Algorithm>
   <Algorithm Name="Check_Token_Release" >
     <Other Language="Java" Text="if(PE_prev.value != PE.value){&#10;if(PE.value == false){&#10;token.value=true;&#10;}&#10;PE_prev.value=PE.value;&#10;}&#10;" />
@@ -104,7 +104,7 @@
     <Other Language="Java" Text="Con1_prev.value=Con1.value;&#10;Con2_prev.value=Con2.value;&#10;" />
   </Algorithm>
   <Algorithm Name="REQ2" >
-    <Other Language="Java" Text="System.out.println(&#34;Request to server&#34;);&#10;System.out.print(&#34;Conveyor 1 input status:&#34;);&#10;System.out.println(Con1.value);&#10;System.out.print(&#34;Conveyor 2 input status:&#34;);&#10;System.out.println(Con2.value);&#10;&#10;System.out.print(&#34;Conveyor 1 output status:&#34;);&#10;System.out.println(Enable1.value);&#10;System.out.print(&#34;Conveyor 2 output status:&#34;);&#10;System.out.println(Enable2.value);&#10;if (Con2.value){&#10;if (queue1.value == 0){&#10;queue1.value=2;&#10;}else if (queue2.value == 0){&#10;queue2.value=2;&#10;}else{&#10;queue3.value=2;&#10;}&#10;Enable2.value=true;&#10;}&#10;" />
+    <Other Language="Java" Text="if (Con2.value){&#10;if (queue1.value == 0){&#10;queue1.value=2;&#10;}else if (queue2.value == 0){&#10;queue2.value=2;&#10;}else{&#10;queue3.value=2;&#10;}&#10;Enable2.value=true;&#10;}&#10;" />
   </Algorithm>
   </BasicFB>
 </FBType>

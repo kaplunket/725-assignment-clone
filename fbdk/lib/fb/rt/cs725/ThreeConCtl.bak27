@@ -21,6 +21,8 @@ public class ThreeConCtl extends FBInstance
   public BOOL TokenIn = new BOOL();
 /** VAR InitToken */
   public BOOL InitToken = new BOOL();
+/** VAR PEMCS */
+  public BOOL PEMCS = new BOOL();
 /** VAR MotoRotate1 */
   public BOOL MotoRotate1 = new BOOL();
 /** VAR MotoRotate2 */
@@ -79,6 +81,7 @@ public class ThreeConCtl extends FBInstance
     if("PE13CS".equals(s)) return PE13CS;
     if("TokenIn".equals(s)) return TokenIn;
     if("InitToken".equals(s)) return InitToken;
+    if("PEMCS".equals(s)) return PEMCS;
     return super.ivNamed(s);}
 /** {@inheritDoc}
 * @param s {@inheritDoc}
@@ -104,6 +107,7 @@ public class ThreeConCtl extends FBInstance
     else if("PE13CS".equals(ivName)) connect_PE13CS((BOOL)newIV);
     else if("TokenIn".equals(ivName)) connect_TokenIn((BOOL)newIV);
     else if("InitToken".equals(ivName)) connect_InitToken((BOOL)newIV);
+    else if("PEMCS".equals(ivName)) connect_PEMCS((BOOL)newIV);
     else super.connectIV(ivName, newIV);
     }
 /** Connect the given variable to the input variable Candidate
@@ -154,8 +158,14 @@ public class ThreeConCtl extends FBInstance
     InitToken = newIV;
     FC11Ring.connectIVNoException("InitToken",InitToken);
     }
-/** FB FC12 */
-  protected ConveyorCTL FC12 = new ConveyorCTL() ;
+/** Connect the given variable to the input variable PEMCS
+  * @param newIV The variable to connect
+ */
+  public void connect_PEMCS(BOOL newIV){
+    PEMCS = newIV;
+    }
+/** FB FC12Multicast */
+  protected ConveyorCTLMulticast FC12Multicast = new ConveyorCTLMulticast() ;
 /** FB FC13 */
   protected ConveyorCTL FC13 = new ConveyorCTL() ;
 /** FB FC11Ring */
@@ -163,18 +173,18 @@ public class ThreeConCtl extends FBInstance
 /** The default constructor. */
 public ThreeConCtl(){
     super();
-    FC12.INITO.connectTo(FC13.INIT);
+    FC12Multicast.INITO.connectTo(FC13.INIT);
     FC13.INITO.connectTo(INITO);
     FC13.CNF.connectTo(CNF);
     REQ.connectTo(FC12.REQ);
     REQ.connectTo(FC13.REQ);
-    FC12.CNF.connectTo(CNF);
+    FC12Multicast.CNF.connectTo(CNF);
     INIT.connectTo(FC11Ring.INIT);
     REQ.connectTo(FC11Ring.REQ);
     FC11Ring.CNF.connectTo(CNF);
     FC11Ring.STOP.connectTo(STOP);
     FC11Ring.START.connectTo(START);
-    FC11Ring.INITO.connectTo(FC12.INIT);
+    FC11Ring.INITO.connectTo(FC12Multicast.INIT);
     TokenEvent.connectTo(FC11Ring.TokenEvent);
     FC11Ring.TokenEventOut.connectTo(TokenEventOut);
     MotoRotate3 = (BOOL)FC13.ovNamedNoException("MotoRotate");
@@ -188,8 +198,8 @@ public ThreeConCtl(){
     FC11Ring.connectIVNoException("TokenIn",TokenIn);
     FC11Ring.connectIVNoException("PE13CS",PE13CS);
     FC11Ring.connectIVNoException("InitToken",InitToken);
-    FC12.PE.initializeNoException("0");
-    FC12.Block.initializeNoException("0");
+    FC12Multicast.PE.initializeNoException("0");
+    FC12Multicast.Block.initializeNoException("0");
     FC12.Candidate.initializeNoException("0");
     FC13.PE.initializeNoException("0");
     FC13.Block.initializeNoException("0");
@@ -203,19 +213,19 @@ public ThreeConCtl(){
   public void initialize(String fbName, Resource r)
   throws FBRManagementException{
     super.initialize(fbName,r);
-    FC12.initialize("FC12",r);
+    FC12Multicast.initialize("FC12Multicast",r);
     FC13.initialize("FC13",r);
     FC11Ring.initialize("FC11Ring",r);
 }
 /** Start the FB instances. */
 public void start( ){
-  FC12.start();
+  FC12Multicast.start();
   FC13.start();
   FC11Ring.start();
 }
 /** Stop the FB instances. */
 public void stop( ){
-  FC12.stop();
+  FC12Multicast.stop();
   FC13.stop();
   FC11Ring.stop();
 }

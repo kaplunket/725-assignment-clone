@@ -1,11 +1,11 @@
-/* Copyright (c)2018 Rockwell Automation. All rights reserved. */
+/* Copyright (c)2020 Rockwell Automation. All rights reserved. */
 package fb.rt.cs725;
 import fb.datatype.*;
 import fb.rt.*;
 import fb.rt.events.*;
 /** FUNCTION_BLOCK ConveyorCTL
   * @author JHC
-  * @version 20180924/JHC
+  * @version 20201028/JHC
   */
 public class ConveyorCTL extends FBInstance
 {
@@ -213,15 +213,9 @@ lastBlock.value=Block.value;
   /** ALGORITHM START IN ST*/
 public void alg_START(){
 MotoRotate.value=true;
-System.out.println(this+" Start "+MotoRotate.value);
-
-System.out.println("Start "+MotoRotate.value);
 }
   /** ALGORITHM STOP IN ST*/
 public void alg_STOP(){
 MotoRotate.value=false;
-System.out.println(this+" Stop "+MotoRotate.value);
-
-System.out.println("Stop "+MotoRotate.value);
 }
 }
