@@ -98,7 +98,7 @@
     <Other Language="Java" Text="if(token.value){&#10;if(queue1.value!=0){&#10;&#10;System.out.println(&#34;QUEUE:&#34;);&#10;System.out.println(queue1);&#10;System.out.println(queue2);&#10;System.out.println(queue3);&#10;&#10;System.out.print(&#34;RELEASE SENSOR:&#34;);&#10;System.out.println(PE.value);&#10;&#10;if(queue1.value==1){&#10;Enable1.value=false;&#10;System.out.print(&#34;Input 1 has accessed section&#34;);&#10;}else{&#10;Enable2.value=false;&#10;System.out.print(&#34;Input 2 has accessed section&#34;);&#10;}&#10;token.value=false;&#10;queue1.value=queue2.value;&#10;queue2.value=queue3.value;&#10;queue3.value=0;&#10;}else{&#10;Enable1.value=false;&#10;Enable2.value=false;&#10;}&#10;}&#10;" />
   </Algorithm>
   <Algorithm Name="Check_Token_Release" >
-    <Other Language="Java" Text="if(PE_prev.value != PE.value){&#10;if(PE.value == false){&#10;token.value=true;&#10;System.out.println(&#34;Token has been released to server&#34;);&#10;}&#10;PE_prev.value=PE.value;&#10;}&#10;" />
+    <Other Language="Java" Text="if(PE_prev.value != PE.value){&#10;if(PE.value == false){&#10;token.value=true;&#10;System.out.println(&#34;Token has been released to server&#34;)&#10;}&#10;PE_prev.value=PE.value;&#10;}&#10;" />
   </Algorithm>
   <Algorithm Name="Con_Prev_Update" >
     <Other Language="Java" Text="Con1_prev.value=Con1.value;&#10;Con2_prev.value=Con2.value;&#10;" />

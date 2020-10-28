@@ -211,6 +211,7 @@ queue3.value=1;
 }
 Enable1.value=true;
 }
+
 }
   /** ALGORITHM Release IN Java*/
 public void alg_Release(){
@@ -248,10 +249,10 @@ public void alg_Check_Token_Release(){
 if(PE_prev.value != PE.value){
 if(PE.value == false){
 token.value=true;
-System.out.println("Token has been released to server");
 }
 PE_prev.value=PE.value;
 }
+
 }
   /** ALGORITHM Con_Prev_Update IN Java*/
 public void alg_Con_Prev_Update(){
