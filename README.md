@@ -7,20 +7,24 @@ particular, the mutual exclusion algorithms considered are:
 * Ring Token
 * Multicast
 
-## Each Section
-The first critical section (considering conveyors 2 and 6 going into conveyor 7) is implemented using central server. Done by kazuki Saegusa
-The second critical section (considering conveyors 4 & 7 going into conveyor 8) is implemented using ring token. Done by Rishab Goswami
-The third critical section (considering conveyors 8 & 11 going into conveyor 9)) is implemented using multicast. Done by Matthew Eden
+## Critical Sections
 
-## Running The Assignment
-In order to run this assignment (using ubuntu), first extract the compsys-725-assignment 2. Inside, go into the fbdk directory. once in the directory open the terminal and run:
+Critical section 1 (with conveyors 2 and 6 feeding into conveyor 7) uses the Central Server implementation to manage mutual exclusion. 
+Critical section 2 (with conveyors 4 and 7 feeding into conveyor 8) uses the Ring Token implementation to manage mutual exclusion.
+Critical section 3 (with conveyors 8 and 11 feeding into conveyor 9) uses the Multicast implementation to manage mutual exclusion.
+
+## Running the BHS
+
+In order to run this project, navigate to the `fbdk` directory via terminal. Once inside, simply run:
 ```
 java -jar editor.jar
 ```
-once the fbdk JEditor opens up click on the yes button when ask "I agree with the terms and conditions".
-Once in the main window, press the play on the button to launch the BaggageSystemCTL. There will be two windows that pop up, a view window and a HMI window. The view window is a visual representation of the baggage system and the HML window can used to add bags onto the conveyors. Bag in 1 will send a bag into conveyor 1, bag in 2 will send a bag into conveyor 2 and so on for 3 and 4. 
+You will need to accept the terms and conditions before proceeding. Once in the main window, open the main file located at `cs725/BaggageSystemCTL.sys`. After successfully loading that file into the editor, launch the configuration using the green play button on the top bar. You can expect to see two windows; a view window illustrating the arrangement of conveyors and an 'HMI' window which will allow the spawning of bags in the system. Bag 1 sends a bag onto conveyor 1, Bag 2 sends a bag onto conveyor 5, Bag 3 sends a bag onto conveyor 3, Bag 4 sends a bag onto conveyor 10.
 
 ## Contributors
+
+Each mutual exclusion algorithm was implemented by a different individual, with Kazuki Saegusa handling Central Server, Rishab Goswami handling Ring Token and Matt Eden handling Multicast.
+
 <table>
   <tr>
     <td align="center"><a href="https://github.com/kaplunket"><img src="https://avatars1.githubusercontent.com/u/48303748?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Kazuki Saegusa</b></sub></a><br /></td>
