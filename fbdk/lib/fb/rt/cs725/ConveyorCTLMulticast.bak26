@@ -262,7 +262,6 @@ public ConveyorCTLMulticast(){
 /** Services the REC_REQ event. */
   public void service_REC_REQ(){
     if ((eccState == index_START) && (!HAS_TOKEN.value)) state_RECEIVE();
-    else if ((eccState == index_MULTICAST) && (TRUMP.value)) state_TEMP();
   }
 /** Services the REPLY event. */
   public void service_REPLY(){
